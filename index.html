@@ -432,6 +432,36 @@ section{position:relative;padding:120px 0;}
 .form-msg{font-size:14px;margin-top:14px;min-height:20px;}
 .form-msg.error{color:#ff6b6b;}
 .form-msg.success{color:#4ade80;}
+.form-msg a{color:inherit;font-weight:600;}
+
+/* Sent state — replaces the form in place so the whole panel confirms,
+   rather than one line of small text under the button. */
+.form-sent{
+  padding:56px 40px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.form-sent[hidden]{display:none;}
+.sent-tick{width:86px;height:86px;margin-bottom:10px;}
+.sent-tick circle{
+  fill:none;stroke:var(--crimson);stroke-width:2.5;
+  stroke-dasharray:166;stroke-dashoffset:166;
+  animation:tickRing .55s cubic-bezier(.65,0,.45,1) forwards;
+}
+.sent-tick path{
+  fill:none;stroke:var(--crimson);stroke-width:4;
+  stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:48;stroke-dashoffset:48;
+  animation:tickMark .35s cubic-bezier(.65,0,.45,1) .5s forwards;
+}
+@keyframes tickRing{to{stroke-dashoffset:0;}}
+@keyframes tickMark{to{stroke-dashoffset:0;}}
+.form-sent h3{font-size:26px;margin-bottom:4px;}
+.form-sent p{color:var(--text-muted);max-width:340px;margin-bottom:8px;}
+.sent-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:18px;}
+.sent-actions .btn{padding:12px 24px;font-size:14px;}
+@media (prefers-reduced-motion: reduce){
+  .sent-tick circle,.sent-tick path{animation:none;stroke-dashoffset:0;}
+}
 
 /* Footer */
 footer{padding:60px 0 30px;border-top:1px solid var(--border);}
@@ -793,8 +823,21 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
           <textarea id="details" placeholder="Tell me about your project…" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Enquiry →</button>
-        <div class="form-msg" id="formMsg"></div>
+        <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
       </form>
+
+      <div class="glass form-sent" id="formSent" hidden>
+        <svg class="sent-tick" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="24"/>
+          <path d="M15 27.5l7.5 7.5L38 19"/>
+        </svg>
+        <h3>Enquiry sent</h3>
+        <p id="sentLine">Thanks — I've got your details and I'll get back to you personally, usually the same day.</p>
+        <div class="sent-actions">
+          <a class="btn btn-primary" id="sentWhatsApp" href="https://wa.me/919825794375" target="_blank" rel="noopener">Chat on WhatsApp</a>
+          <button type="button" class="btn btn-outline" id="sendAnother">Send another</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -168,6 +168,32 @@
 
   var form = document.getElementById('contactForm');
   var formMsg = document.getElementById('formMsg');
+  var formSent = document.getElementById('formSent');
+  var sentLine = document.getElementById('sentLine');
+  var sendAnother = document.getElementById('sendAnother');
+
+  /* Swap the whole panel over to a confirmation rather than printing one
+     line of small text under the button — pressing Send should feel like
+     something clearly happened. */
+  function showSent(personName){
+    var first = (personName || '').trim().split(/\s+/)[0];
+    sentLine.textContent = (first ? 'Thanks ' + first + ' — ' : 'Thanks — ') +
+      'I\'ve got your details and I\'ll get back to you personally, usually the same day.';
+    form.hidden = true;
+    formSent.hidden = false;
+    formSent.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+  }
+
+  if(sendAnother){
+    sendAnother.addEventListener('click', function(){
+      form.reset();
+      formMsg.textContent = '';
+      formMsg.className = 'form-msg';
+      formSent.hidden = true;
+      form.hidden = false;
+      form.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    });
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -231,9 +257,7 @@
       .then(function(j){
         if(btn){ btn.disabled = false; btn.textContent = btnLabel; }
         if(j && (j.success === true || j.success === 'true')){
-          form.reset();
-          formMsg.textContent = 'Thanks! Your enquiry is in — I\'ll reply shortly.';
-          formMsg.className = 'form-msg success';
+          showSent(name);
         } else if(j && /activation/i.test(j.message || '')){
           /* FormSubmit holds the very first message to a new address until the
              activation link in its email is clicked. Worth naming plainly so
