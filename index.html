@@ -491,6 +491,9 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
   section{padding:70px 0;}
   .hero-btns{flex-direction:column;align-items:stretch;}
   .footer-top{flex-direction:column;}
+  /* full "K Tech Solutions" wordmark needs to sit beside the hamburger
+     on a 320px screen without wrapping */
+  .logo{font-size:18px;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -534,7 +537,7 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
 <!-- Navbar -->
 <nav id="navbar">
   <div class="container nav-inner">
-    <a href="#home" class="logo">K<span>Tech</span></a>
+    <a href="#home" class="logo">K <span>Tech</span> Solutions</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
       <li><a href="#about" class="nav-link" data-section="about">About</a></li>
@@ -681,24 +684,48 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
     <p class="section-sub center" data-aos="fade-up">A few of the businesses I've helped bring online.</p>
     <div class="projects-grid">
       <a class="glass project-card" data-aos="fade-up" data-tilt data-tilt-max="6"
-         href="https://karandesai8044-lang.github.io/emporium-steels-final/index.html" target="_blank" rel="noopener">
-        <div class="project-icon">🏭</div>
-        <h3>smmetal.org</h3>
-        <p>Corporate website for a steel &amp; metal manufacturing business — clean, professional, and fully responsive.</p>
+         href="https://bharatmetalandtubes.com" target="_blank" rel="noopener">
+        <div class="project-icon">🏗️</div>
+        <h3>bharatmetalandtubes.com</h3>
+        <p>Full business site for a ferrous &amp; non-ferrous metal stockist in Raipur — eight product categories, a live weight calculator, enquiry form with file attachments, and local SEO built in.</p>
         <div class="tag-row">
-          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Business</span>
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">SEO</span><span class="tag">Business</span>
         </div>
         <span class="visit-btn">Visit Site
           <svg viewBox="0 0 24 24"><path d="M6 4h11.59L14 .41 15.41-1 22 5.59V17h-2V6.41L9.41 17 8 15.59 18.59 5H6V4Z" transform="translate(0 1)"/></svg>
         </span>
       </a>
-      <a class="glass project-card" data-aos="fade-up" data-aos-delay="150" data-tilt data-tilt-max="6"
-         href="https://karandesai8044-lang.github.io/gym-web-/" target="_blank" rel="noopener">
-        <div class="project-icon">🛋️</div>
-        <h3>dwarkadhishinteriors.org</h3>
-        <p>Modern website for an interior design brand — elegant layout, smooth animations, and mobile-friendly design.</p>
+      <a class="glass project-card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="6"
+         href="https://smmetal.org" target="_blank" rel="noopener">
+        <div class="project-icon">⚙️</div>
+        <h3>smmetal.org</h3>
+        <p>Corporate website for a premium stainless steel supplier in Ahmedabad — clean product presentation, responsive layout and fast load times.</p>
         <div class="tag-row">
           <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive</span><span class="tag">Business</span>
+        </div>
+        <span class="visit-btn">Visit Site
+          <svg viewBox="0 0 24 24"><path d="M6 4h11.59L14 .41 15.41-1 22 5.59V17h-2V6.41L9.41 17 8 15.59 18.59 5H6V4Z" transform="translate(0 1)"/></svg>
+        </span>
+      </a>
+      <a class="glass project-card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="6"
+         href="https://dwarkadhishinteriors.org/" target="_blank" rel="noopener">
+        <div class="project-icon">🪟</div>
+        <h3>dwarkadhishinteriors.org</h3>
+        <p>Website for a steel, aluminium glass and PVC furniture business — product galleries, smooth animations and a mobile-first layout.</p>
+        <div class="tag-row">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Responsive</span><span class="tag">Business</span>
+        </div>
+        <span class="visit-btn">Visit Site
+          <svg viewBox="0 0 24 24"><path d="M6 4h11.59L14 .41 15.41-1 22 5.59V17h-2V6.41L9.41 17 8 15.59 18.59 5H6V4Z" transform="translate(0 1)"/></svg>
+        </span>
+      </a>
+      <a class="glass project-card" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="6"
+         href="https://karandesai8044-lang.github.io/emporium-steels-final/" target="_blank" rel="noopener">
+        <div class="project-icon">🏭</div>
+        <h3>Emporium Steels</h3>
+        <p>Stainless steel and mild steel supplier site for an Ahmedabad business — built and deployed, currently live on GitHub Pages while the domain is arranged.</p>
+        <div class="tag-row">
+          <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Business</span>
         </div>
         <span class="visit-btn">Visit Site
           <svg viewBox="0 0 24 24"><path d="M6 4h11.59L14 .41 15.41-1 22 5.59V17h-2V6.41L9.41 17 8 15.59 18.59 5H6V4Z" transform="translate(0 1)"/></svg>
@@ -716,7 +743,7 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
     <p class="section-sub center" data-aos="fade-up">Have a project in mind? Let's talk — my inbox (and WhatsApp) is always open.</p>
     <div class="contact-grid">
       <div class="contact-info" data-aos="fade-up">
-        <p>Tell me what you need and I'll get back to you personally on WhatsApp with next steps and a quote.</p>
+        <p>Tell me what you need and I'll get back to you personally with next steps and a quote — usually the same day.</p>
         <div class="contact-item">
           <span class="social-icon"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm2 2v.01L12 13l8-6.99V6H4Zm16 2.24-7.4 6.47a1 1 0 0 1-1.2 0L4 8.24V18h16V8.24Z"/></svg></span>
           <span>ktechsolutions.in@gmail.com</span>
@@ -765,7 +792,7 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
           <label for="details">Project details</label>
           <textarea id="details" placeholder="Tell me about your project…" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send on WhatsApp →</button>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Enquiry →</button>
         <div class="form-msg" id="formMsg"></div>
       </form>
     </div>
@@ -779,7 +806,7 @@ footer{padding:60px 0 30px;border-top:1px solid var(--border);}
   <div class="container">
     <div class="footer-top">
       <div>
-        <a href="#home" class="logo">K<span>Tech</span></a>
+        <a href="#home" class="logo">K <span>Tech</span> Solutions</a>
         <p class="footer-tagline">Building fast, secure and beautiful web experiences that grow your business. Serving Ahmedabad, Rajkot, Sanchore &amp; Raipur.</p>
       </div>
       <div class="footer-links">

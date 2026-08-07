@@ -160,9 +160,15 @@
   }, { threshold: 0.3 });
   skillsGrid.querySelectorAll('.skill-card').forEach(function(c){ barObserver.observe(c); });
 
-  /* Contact form -> WhatsApp */
+  /* Contact form -> email inbox, via FormSubmit.
+     The first submission to a new address triggers a one-time activation
+     mail from FormSubmit; until that link is clicked nothing is delivered. */
+  var ENQUIRY_EMAIL = 'ktechsolutions.in@gmail.com';
+  var WHATSAPP_NO   = '919825794375';
+
   var form = document.getElementById('contactForm');
   var formMsg = document.getElementById('formMsg');
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var name = document.getElementById('name').value.trim();
@@ -177,18 +183,54 @@
       return;
     }
 
-    var msg =
-      '*New Project Enquiry — K Tech Solutions*\n\n' +
-      '*Name:* ' + name + '\n' +
-      '*Contact:* ' + contact + '\n' +
-      '*Needs:* ' + need + '\n' +
-      '*Budget:* ' + (budget || 'Not specified') + '\n' +
-      '*Details:* ' + details;
+    var btn = form.querySelector('button[type="submit"]');
+    var btnLabel = btn ? btn.textContent : '';
+    if(btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    formMsg.textContent = '';
+    formMsg.className = 'form-msg';
 
-    window.open('https://wa.me/919825794375?text=' + encodeURIComponent(msg), '_blank');
+    var payload = new FormData();
+    payload.append('_subject', 'New project enquiry — ' + name);
+    payload.append('_template', 'table');
+    payload.append('_captcha', 'false');
+    payload.append('Name', name);
+    payload.append('Phone or Email', contact);
+    payload.append('Needs', need);
+    payload.append('Budget', budget || 'Not specified');
+    payload.append('Project details', details);
 
-    formMsg.textContent = 'Thanks! Opening WhatsApp…';
-    formMsg.className = 'form-msg success';
-    form.reset();
+    function fallbackToWhatsApp(){
+      var msg =
+        '*New Project Enquiry — K Tech Solutions*\n\n' +
+        '*Name:* ' + name + '\n' +
+        '*Contact:* ' + contact + '\n' +
+        '*Needs:* ' + need + '\n' +
+        '*Budget:* ' + (budget || 'Not specified') + '\n' +
+        '*Details:* ' + details;
+      window.open('https://wa.me/' + WHATSAPP_NO + '?text=' + encodeURIComponent(msg), '_blank');
+      formMsg.textContent = 'Could not send by email — opening WhatsApp instead.';
+      formMsg.className = 'form-msg error';
+    }
+
+    fetch('https://formsubmit.co/ajax/' + encodeURIComponent(ENQUIRY_EMAIL), {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: payload
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(btn){ btn.disabled = false; btn.textContent = btnLabel; }
+        if(j && (j.success === true || j.success === 'true')){
+          form.reset();
+          formMsg.textContent = 'Thanks! Your enquiry is in — I\'ll reply shortly.';
+          formMsg.className = 'form-msg success';
+        } else {
+          fallbackToWhatsApp();
+        }
+      })
+      .catch(function(){
+        if(btn){ btn.disabled = false; btn.textContent = btnLabel; }
+        fallbackToWhatsApp();   // offline or request blocked
+      });
   });
 })();
