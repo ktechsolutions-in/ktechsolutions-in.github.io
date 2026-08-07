@@ -199,7 +199,10 @@
     payload.append('Budget', budget || 'Not specified');
     payload.append('Project details', details);
 
-    function fallbackToWhatsApp(){
+    /* Offer WhatsApp as a link rather than calling window.open here: this runs
+       inside a fetch callback, which is no longer a user gesture, so browsers
+       block the popup silently and the visitor sees nothing happen at all. */
+    function offerWhatsApp(leadText){
       var msg =
         '*New Project Enquiry — K Tech Solutions*\n\n' +
         '*Name:* ' + name + '\n' +
@@ -207,8 +210,15 @@
         '*Needs:* ' + need + '\n' +
         '*Budget:* ' + (budget || 'Not specified') + '\n' +
         '*Details:* ' + details;
-      window.open('https://wa.me/' + WHATSAPP_NO + '?text=' + encodeURIComponent(msg), '_blank');
-      formMsg.textContent = 'Could not send by email — opening WhatsApp instead.';
+
+      formMsg.textContent = leadText + ' ';
+      var a = document.createElement('a');
+      a.href = 'https://wa.me/' + WHATSAPP_NO + '?text=' + encodeURIComponent(msg);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Send it on WhatsApp instead →';
+      a.style.textDecoration = 'underline';
+      formMsg.appendChild(a);
       formMsg.className = 'form-msg error';
     }
 
@@ -224,13 +234,18 @@
           form.reset();
           formMsg.textContent = 'Thanks! Your enquiry is in — I\'ll reply shortly.';
           formMsg.className = 'form-msg success';
+        } else if(j && /activation/i.test(j.message || '')){
+          /* FormSubmit holds the very first message to a new address until the
+             activation link in its email is clicked. Worth naming plainly so
+             it does not look like the form is simply broken. */
+          offerWhatsApp('Email delivery is still being set up.');
         } else {
-          fallbackToWhatsApp();
+          offerWhatsApp('Could not send by email.');
         }
       })
       .catch(function(){
         if(btn){ btn.disabled = false; btn.textContent = btnLabel; }
-        fallbackToWhatsApp();   // offline or request blocked
+        offerWhatsApp('Could not send by email.');   // offline or blocked
       });
   });
 })();
