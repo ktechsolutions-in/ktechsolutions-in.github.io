@@ -163,7 +163,7 @@
   /* Contact form -> email inbox, via FormSubmit.
      The first submission to a new address triggers a one-time activation
      mail from FormSubmit; until that link is clicked nothing is delivered. */
-  var ENQUIRY_EMAIL = 'ktechsolutions.in@gmail.com';
+  var ENQUIRY_EMAIL = 'karandesai8044@gmail.com';
   var WHATSAPP_NO   = '919825794375';
 
   var form = document.getElementById('contactForm');
