@@ -196,6 +196,14 @@
     });
   }
 
+  /* Clear the red highlight as soon as the visitor starts fixing a field. */
+  ['name', 'contact', 'need', 'details'].forEach(function(id){
+    var el = document.getElementById(id);
+    var clear = function(){ el.style.borderColor = ''; };
+    el.addEventListener('input', clear);
+    el.addEventListener('change', clear);
+  });
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var name = document.getElementById('name').value.trim();
@@ -204,9 +212,22 @@
     var budget = document.getElementById('budget').value;
     var details = document.getElementById('details').value.trim();
 
-    if(!name || !contact || !need || !details){
-      formMsg.textContent = 'Please fill in all required fields.';
+    /* Highlight whatever is missing and jump to it. The old version printed
+       one line of small text under the button, which was easy to miss on a
+       phone — it looked like pressing Send simply did nothing. */
+    var firstMissing = null;
+    [['name', name], ['contact', contact], ['need', need], ['details', details]]
+      .forEach(function(pair){
+        var el = document.getElementById(pair[0]);
+        var empty = !pair[1];
+        el.style.borderColor = empty ? '#ff6b6b' : '';
+        if(empty && !firstMissing) firstMissing = el;
+      });
+    if(firstMissing){
+      formMsg.textContent = 'Please fill in the highlighted fields.';
       formMsg.className = 'form-msg error';
+      formMsg.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      firstMissing.focus();
       return;
     }
 
