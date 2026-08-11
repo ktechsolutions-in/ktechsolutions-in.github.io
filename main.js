@@ -164,6 +164,7 @@
      The first submission to a new address triggers a one-time activation
      mail from FormSubmit; until that link is clicked nothing is delivered. */
   var ENQUIRY_EMAIL = 'karandesai8044@gmail.com';
+  var ENQUIRY_CC    = 'ktechsolutions.in@gmail.com';  // second inbox — delivered as a CC
   var WHATSAPP_NO   = '919825794375';
 
   var form = document.getElementById('contactForm');
@@ -219,6 +220,7 @@
     payload.append('_subject', 'New project enquiry — ' + name);
     payload.append('_template', 'table');
     payload.append('_captcha', 'false');
+    payload.append('_cc', ENQUIRY_CC);   // copy every enquiry to the second inbox too
     payload.append('Name', name);
     payload.append('Phone or Email', contact);
     payload.append('Needs', need);
