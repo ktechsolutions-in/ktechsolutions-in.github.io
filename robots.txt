@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://karandesai8044-lang.github.io/sitemap.xml
