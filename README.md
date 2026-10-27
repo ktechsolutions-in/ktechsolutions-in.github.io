@@ -3,7 +3,7 @@
 Portfolio site for **Karan Desai**, Full-Stack Web Developer (K Tech Solutions),
 serving Ahmedabad, Rajkot, Sanchore and Raipur.
 
-**Live:** https://karandesai8044-lang.github.io/
+**Live:** https://ktechsolutions-in.github.io/
 
 ## Stack
 
