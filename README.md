@@ -1,7 +1,7 @@
 # K Tech Solutions — Karan Desai
 
 Portfolio site for **Karan Desai** (K Tech Solutions). Plain HTML + CSS + JS, no build step.
-Live: https://karandesai8044-lang.github.io/
+Live: https://ktechsolution-in.github.io/
 
 | File | Purpose |
 |---|---|
